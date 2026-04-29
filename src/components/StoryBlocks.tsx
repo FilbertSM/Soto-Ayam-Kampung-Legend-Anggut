@@ -155,7 +155,7 @@ export default function StoryBlocks({ isLoaded }: { isLoaded: boolean }) {
               Experience the legendary taste of Makassar, delivered hot to your door or ready for pickup.
             </p>
             <a
-              href="https://wa.me/089678243688"
+              href="https://wa.me/629678243688"
               target="_blank"
               rel="noopener noreferrer"
               className="bg-[#D49A00] text-[#1A0F0A] font-sans font-semibold text-[clamp(1rem,1.5vw,1.25rem)] px-8 py-4 rounded-full hover:bg-[#b38200] transition-colors duration-300 shadow-xl inline-block"
@@ -259,7 +259,7 @@ export default function StoryBlocks({ isLoaded }: { isLoaded: boolean }) {
                   <span>@sotoayam.anggut</span>
                 </a>
                 <a
-                  href="https://wa.me/089678243688"
+                  href="https://wa.me/629678243688"
                   className="flex items-center justify-center gap-3 px-8 py-4 bg-transparent border border-[#D49A00] text-[#D49A00] rounded-full hover:bg-[#D49A00] hover:text-[#1A0F0A] transition-all duration-300 font-sans font-semibold text-lg group"
                 >
                   <MessageCircle className="w-6 h-6 group-hover:scale-110 transition-transform duration-300" />
