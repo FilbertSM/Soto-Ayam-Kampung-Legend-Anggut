@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useScroll, useMotionValueEvent } from "framer-motion";
 import { FRAME_COUNT } from "@/lib/constants";
 
@@ -24,20 +24,42 @@ export default function CanvasSequence({ images }: CanvasSequenceProps) {
     let offsetX = 0;
     let offsetY = 0;
 
-    if (imgAspect > canvasAspect) {
-      // Image is wider than canvas
-      drawWidth = rect.height * imgAspect;
-      offsetX = (rect.width - drawWidth) / 2;
+    // Responsive Object-Contain behavior for everything below large tablets
+    const isMobileOrTablet = rect.width < 1024;
+
+    if (isMobileOrTablet) {
+      // Act like 'object-cover' but align horizontal center so it fills viewport height perfectly
+      // and crops horizontally evenly on mobile width.
+      if (imgAspect > canvasAspect) {
+        // Image is wider than canvas -> crop sides, fill height
+        drawHeight = rect.height;
+        drawWidth = rect.height * imgAspect;
+        offsetX = (rect.width - drawWidth) / 2;
+        offsetY = 0;
+      } else {
+        // Fallback
+        drawWidth = rect.width;
+        drawHeight = rect.width / imgAspect;
+        offsetX = 0;
+        offsetY = (rect.height - drawHeight) / 2;
+      }
     } else {
-      // Image is taller than canvas
-      drawHeight = rect.width / imgAspect;
-      offsetY = (rect.height - drawHeight) / 2;
+      // Desktop / Ultrawide: Act like 'object-cover' to fill the whole screen immersively.
+      if (imgAspect > canvasAspect) {
+        // Image is wider than canvas
+        drawWidth = rect.height * imgAspect;
+        offsetX = (rect.width - drawWidth) / 2;
+      } else {
+        // Image is taller than canvas
+        drawHeight = rect.width / imgAspect;
+        offsetY = (rect.height - drawHeight) / 2;
+      }
     }
 
     ctx.clearRect(0, 0, rect.width, rect.height);
 
     // Draw base background color
-    ctx.fillStyle = '#1A0F0A';
+    ctx.fillStyle = '#110A07'; // Match the footer gradient transition
     ctx.fillRect(0, 0, rect.width, rect.height);
 
     ctx.drawImage(img, offsetX, offsetY, drawWidth, drawHeight);
@@ -48,9 +70,22 @@ export default function CanvasSequence({ images }: CanvasSequenceProps) {
     imagesRef.current = images;
   }, [images]);
 
+  // Render empty function if scroll ends so hero stops displaying
+  const [shouldRenderCanvas, setShouldRenderCanvas] = useState(true);
+
+  useMotionValueEvent(scrollYProgress, "change", (latest) => {
+    // Arbitrary cut-off when reaching the bottom section
+    // If the scroll is past 95% (where Heroic CTA is complete and Footer starts), we can choose to hide/fade canvas
+    if (latest > 0.98) {
+      setShouldRenderCanvas(false);
+    } else {
+      setShouldRenderCanvas(true);
+    }
+  });
+
   // Redraw when new background images load (fixes blank canvas mid-scroll)
   useEffect(() => {
-    if (!canvasRef.current || images.length === 0) return;
+    if (!canvasRef.current || images.length === 0 || !shouldRenderCanvas) return;
     const canvas = canvasRef.current;
     const ctx = canvas.getContext("2d", { alpha: false });
     if (!ctx) return;
@@ -136,7 +171,7 @@ export default function CanvasSequence({ images }: CanvasSequenceProps) {
       ref={canvasRef}
       role="img"
       aria-label="Cinematic sequence showing the preparation of Soto Anggut"
-      className="fixed top-0 left-0 z-0 w-full h-full object-cover"
+      className={`fixed top-0 left-0 z-0 w-full h-full object-cover transition-opacity duration-1000 ${shouldRenderCanvas ? 'opacity-100' : 'opacity-0'}`}
       style={{ willChange: 'transform, opacity', transform: 'translateZ(0)' }}
     />
   );

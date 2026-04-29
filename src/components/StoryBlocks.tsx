@@ -80,84 +80,85 @@ export default function StoryBlocks({ isLoaded }: { isLoaded: boolean }) {
             className="text-center w-full max-w-6xl"
           >
             <h1 className="font-serif text-[clamp(3rem,8vw,8rem)] text-[#FDFBF7] drop-shadow-[0_4px_24px_rgba(0,0,0,0.8)] leading-tight">
-              The Authentic <br className="hidden md:block" />Makassar Experience
+              Soto Ayam <br className="hidden md:block" /> Kampung <br className="hidden md:block" /> Legend
             </h1>
           </motion.div>
         </section>
 
         {/* 25-50%: Core Ingredients */}
-        <section className="min-h-screen flex items-center justify-center px-4">
-          <div className="max-w-6xl w-full flex flex-col md:flex-row gap-16 md:gap-8 justify-between">
-            <motion.div
-              initial={{ opacity: 0, x: shouldReduceMotion ? 0 : -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: shouldReduceMotion ? 0 : 0.8, ease: "easeOut" }}
-              viewport={{ once: false, amount: 0.5 }}
-              className="max-w-xl w-full"
-            >
-              <h2 className="font-serif text-[clamp(2.5rem,5vw,5rem)] text-[#FDFBF7] drop-shadow-[0_4px_24px_rgba(0,0,0,0.8)] mb-6 leading-tight">
-                24-Hour <br />Spiced Broth
-              </h2>
-              <p className="font-sans text-[#FDFBF7] text-[clamp(1.125rem,2vw,1.5rem)] drop-shadow-[0_2px_12px_rgba(0,0,0,0.8)]">
-                Slow-cooked to perfection. We simmer our broth with a secret blend of Makassar spices, letting the rich flavors deepen over a full day.
-              </p>
-            </motion.div>
+        <section className="min-h-screen flex items-center justify-start px-4 md:px-24">
+          <motion.div
+            initial={{ opacity: 0, x: shouldReduceMotion ? 0 : -50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: shouldReduceMotion ? 0 : 0.8, ease: "easeOut" }}
+            viewport={{ once: false, amount: 0.5 }}
+            className="max-w-xl w-full text-left"
+          >
+            <h2 className="font-serif text-[clamp(2.5rem,5vw,5rem)] text-[#FDFBF7] drop-shadow-[0_4px_24px_rgba(0,0,0,0.8)] mb-6 leading-tight">
+              24-Hour <br />Spiced Broth
+            </h2>
+            <p className="font-sans text-[#FDFBF7] text-[clamp(1.125rem,2vw,1.5rem)] drop-shadow-[0_2px_12px_rgba(0,0,0,0.8)]">
+              Slow-cooked to perfection. We simmer our broth with a secret blend of Makassar spices, letting the rich flavors deepen over a full day.
+            </p>
+          </motion.div>
+        </section>
 
-            <motion.div
-              initial={{ opacity: 0, x: shouldReduceMotion ? 0 : 50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: shouldReduceMotion ? 0 : 0.8, ease: "easeOut", delay: shouldReduceMotion ? 0 : 0.2 }}
-              viewport={{ once: false, amount: 0.5 }}
-              className="max-w-xl w-full md:mt-32"
-            >
-              <h2 className="font-serif text-[clamp(2.5rem,5vw,5rem)] text-[#FDFBF7] drop-shadow-[0_4px_24px_rgba(0,0,0,0.8)] mb-6 leading-tight">
-                Premium Beef & <br />Fresh Shallots
-              </h2>
-              <p className="font-sans text-[#FDFBF7] text-[clamp(1.125rem,2vw,1.5rem)] drop-shadow-[0_2px_12px_rgba(0,0,0,0.8)]">
-                Only the most tender cuts of beef make the bowl, topped with perfectly crisp shallots for that iconic Soto Anggut crunch.
-              </p>
-            </motion.div>
-          </div>
+        {/* 50-75%: The Heritage */}
+        <section className="min-h-screen flex items-center justify-end px-4 md:px-24">
+          <motion.div
+            initial={{ opacity: 0, x: shouldReduceMotion ? 0 : 50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: shouldReduceMotion ? 0 : 0.8, ease: "easeOut" }}
+            viewport={{ once: false, amount: 0.5 }}
+            className="max-w-xl w-full text-right"
+          >
+            <h2 className="font-serif text-[clamp(2.5rem,5vw,5rem)] text-[#FDFBF7] drop-shadow-[0_4px_24px_rgba(0,0,0,0.8)] mb-6 leading-tight">
+              Premium Beef <br /> &&nbsp;Fresh&nbsp;Shallots
+            </h2>
+            <p className="font-sans text-[#FDFBF7] text-[clamp(1.125rem,2vw,1.5rem)] drop-shadow-[0_2px_12px_rgba(0,0,0,0.8)] ml-auto text-right">
+              Only the most tender cuts of beef make the bowl, topped with perfectly crisp shallots for that iconic Soto Anggut crunch.
+            </p>
+          </motion.div>
         </section>
 
         {/* 50-85%: The Lift */}
-        <section className="h-[150vh] flex items-end justify-center pb-32 px-4 pointer-events-none">
+        <section className="min-h-screen flex items-end justify-start pb-32 px-4 md:px-24 pointer-events-none">
           <motion.div
             initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 50 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: shouldReduceMotion ? 0 : 0.8, ease: "easeOut" }}
             viewport={{ once: false, amount: 0.8 }}
-            className="w-full max-w-6xl text-center pointer-events-auto"
+            className="w-full max-w-xl text-left pointer-events-auto"
           >
-            <h2 className="font-serif text-[clamp(3.5rem,7vw,7rem)] text-[#FDFBF7] drop-shadow-[0_4px_24px_rgba(0,0,0,0.8)] mb-4 leading-none">
-              A Burst of Freshness.
+            <h2 className="font-serif text-[clamp(2.5rem,5vw,5rem)] text-[#FDFBF7] drop-shadow-[0_4px_24px_rgba(0,0,0,0.8)] mb-4 leading-none">
+              A Burst of <br />Freshness.
             </h2>
-            <p className="font-serif text-[clamp(1.5rem,3vw,3rem)] text-[#FDFBF7] drop-shadow-[0_2px_12px_rgba(0,0,0,0.8)] italic">
+            <p className="font-serif text-[clamp(1.25rem,2.5vw,2rem)] text-[#FDFBF7] drop-shadow-[0_2px_12px_rgba(0,0,0,0.8)] italic">
               Passed Down Through Generations.
             </p>
           </motion.div>
         </section>
 
         {/* 85-100%: Heroic CTA */}
-        <section className="h-[50vh] flex items-center justify-center px-4">
+        <section className="min-h-screen flex items-center justify-end px-4 md:px-24">
           <motion.div
-            initial={{ opacity: 0, scale: shouldReduceMotion ? 1 : 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
+            initial={{ opacity: 0, x: shouldReduceMotion ? 0 : 50 }}
+            whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: shouldReduceMotion ? 0 : 0.8, ease: "easeOut" }}
             viewport={{ once: false, amount: 0.5 }}
-            className="text-center w-full max-w-4xl"
+            className="text-right w-full max-w-xl"
           >
-            <h2 className="font-serif text-[clamp(3.5rem,6vw,6rem)] text-[#FDFBF7] drop-shadow-[0_4px_24px_rgba(0,0,0,0.8)] mb-6 leading-tight">
+            <h2 className="font-serif text-[clamp(2.5rem,5vw,5rem)] text-[#FDFBF7] drop-shadow-[0_4px_24px_rgba(0,0,0,0.8)] mb-6 leading-tight">
               Craving a Bowl?
             </h2>
-            <p className="font-sans text-[clamp(1.25rem,2.5vw,1.75rem)] text-[#FDFBF7] drop-shadow-[0_2px_12px_rgba(0,0,0,0.8)] mb-10">
+            <p className="font-sans text-[clamp(1.125rem,2vw,1.5rem)] text-[#FDFBF7] drop-shadow-[0_2px_12px_rgba(0,0,0,0.8)] mb-10 ml-auto">
               Experience the legendary taste of Makassar, delivered hot to your door or ready for pickup.
             </p>
             <a
               href="https://wa.me/089678243688"
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-[#D49A00] text-[#1A0F0A] font-sans font-semibold text-lg md:text-xl px-10 py-5 rounded-full hover:bg-[#b38200] transition-colors duration-300 shadow-xl inline-block"
+              className="bg-[#D49A00] text-[#1A0F0A] font-sans font-semibold text-[clamp(1rem,1.5vw,1.25rem)] px-8 py-4 rounded-full hover:bg-[#b38200] transition-colors duration-300 shadow-xl inline-block"
             >
               Order Direct
             </a>
@@ -165,8 +166,10 @@ export default function StoryBlocks({ isLoaded }: { isLoaded: boolean }) {
         </section>
       </div>
 
-      {/* Location & Hours */}
-      <section className="min-h-screen flex items-center justify-center py-32 px-4 relative z-20 mt-32" id="visit">
+      {/* Solid warm overlay background for footer section */}
+      <div className="relative z-20 bg-gradient-to-t from-[#1F140C] via-[#1F140C]/95 to-transparent pt-32 pb-8">
+        {/* Location & Hours */}
+        <section className="min-h-screen flex items-center justify-center px-4" id="visit">
         <motion.div
           initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 50 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -296,6 +299,7 @@ export default function StoryBlocks({ isLoaded }: { isLoaded: boolean }) {
           </div>
         </motion.div>
       </section>
+      </div>
     </>
   );
 }
