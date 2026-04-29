@@ -70,23 +70,16 @@ export default function StoryBlocks({ isLoaded }: { isLoaded: boolean }) {
 
   return (
     <>
-      <div ref={containerRef} className="relative z-10 w-full">
-        {/* 0-25%: Arrival */}
-        <section className="min-h-screen flex items-center justify-center px-4" id="story">
-          <motion.div
-            initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 50 }}
-            animate={isLoaded ? { opacity: 1, y: 0 } : { opacity: 0, y: shouldReduceMotion ? 0 : 50 }}
-            transition={{ duration: shouldReduceMotion ? 0 : 1, ease: "easeOut", delay: shouldReduceMotion ? 0 : 0.6 }}
-            className="text-center w-full max-w-6xl"
-          >
-            <h1 className="font-serif text-[clamp(3rem,8vw,8rem)] text-[#FDFBF7] drop-shadow-[0_4px_24px_rgba(0,0,0,0.8)] leading-tight">
-              Soto Ayam <br className="hidden md:block" /> Kampung <br className="hidden md:block" /> Legend
-            </h1>
-          </motion.div>
+      <div ref={containerRef} className="relative z-10 w-full pointer-events-none">
+        
+        {/* Make children pointer-events-auto so links still work */}
+        
+        {/* 0-25%: Arrival (Removed big text, kept for spacing) */}
+        <section className="min-h-[50vh] flex items-center justify-center px-4" id="story">
         </section>
 
         {/* 25-50%: Core Ingredients */}
-        <section className="min-h-screen flex items-center justify-start px-4 md:px-24">
+        <section className="min-h-screen flex items-center justify-start px-4 md:px-24 pointer-events-auto">
           <motion.div
             initial={{ opacity: 0, x: shouldReduceMotion ? 0 : -50 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -104,7 +97,7 @@ export default function StoryBlocks({ isLoaded }: { isLoaded: boolean }) {
         </section>
 
         {/* 50-75%: The Heritage */}
-        <section className="min-h-screen flex items-center justify-end px-4 md:px-24">
+        <section className="min-h-screen flex items-center justify-end px-4 md:px-24 pointer-events-auto">
           <motion.div
             initial={{ opacity: 0, x: shouldReduceMotion ? 0 : 50 }}
             whileInView={{ opacity: 1, x: 0 }}

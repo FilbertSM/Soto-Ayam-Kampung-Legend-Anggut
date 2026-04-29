@@ -8,6 +8,7 @@ import FloatWhatsApp from "@/components/ui/FloatWhatsApp";
 import Loader from "@/components/ui/Loader";
 import FilmGrain from "@/components/ui/FilmGrain";
 import Header from "@/components/ui/Header";
+import HeroTitle from "@/components/ui/HeroTitle";
 import { FRAME_COUNT } from "@/lib/constants";
 
 export default function Home() {
@@ -131,10 +132,13 @@ export default function Home() {
 
       <Header />
 
-      {/* 
-        Pass loaded images to CanvasSequence so it doesn't need to load them again
-      */}
-      <CanvasSequence images={images} />
+      <div className="relative w-full h-[100vh]">
+        {/* 
+          Pass loaded images to CanvasSequence so it doesn't need to load them again
+        */}
+        <CanvasSequence images={images} />
+        <HeroTitle />
+      </div>
 
       {/* 
         Pass isLoaded to StoryBlocks so initial animations only trigger after loading
