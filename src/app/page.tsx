@@ -1,65 +1,135 @@
-import Image from "next/image";
+"use client";
+
+import { useState, useEffect, useCallback } from "react";
+import { AnimatePresence } from "framer-motion";
+import CanvasSequence from "@/components/CanvasSequence";
+import StoryBlocks from "@/components/StoryBlocks";
+import FloatWhatsApp from "@/components/ui/FloatWhatsApp";
+import Loader from "@/components/ui/Loader";
+import FilmGrain from "@/components/ui/FilmGrain";
+import { FRAME_COUNT } from "@/lib/constants";
 
 export default function Home() {
+  const [images, setImages] = useState<HTMLImageElement[]>([]);
+  const [progress, setProgress] = useState(0);
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  const preloadImages = useCallback(async () => {
+    let loadedCount = 0;
+    const INITIAL_FRAMES = 24; // Load first 10% (24 frames) for fast initial load
+
+    // Preload Critical Path
+    const initialPromises = Array.from({ length: INITIAL_FRAMES }, (_, i) => {
+      return new Promise<{img: HTMLImageElement, success: boolean}>((resolve) => {
+        const img = new Image();
+        img.src = `/Frame/frame-${(i + 1).toString().padStart(3, '0')}.webp`;
+        
+        const handleComplete = (success: boolean) => {
+          loadedCount++;
+          setProgress(Math.round((loadedCount / INITIAL_FRAMES) * 100));
+          resolve({ img, success });
+        };
+
+        img.onload = () => handleComplete(true);
+        img.onerror = () => handleComplete(false);
+      });
+    });
+
+    const initialResults = await Promise.all(initialPromises);
+    
+    // Process results to maintain order and fallback
+    const loadedImages: HTMLImageElement[] = [];
+    initialResults.forEach(({ img, success }) => {
+      if (success) {
+        loadedImages.push(img);
+      } else if (loadedImages.length > 0) {
+        loadedImages.push(loadedImages[loadedImages.length - 1]);
+      } else {
+        loadedImages.push(img);
+      }
+    });
+
+    setImages([...loadedImages]);
+
+    // Slight delay to show 100% before animating out
+    setTimeout(() => {
+      setIsLoaded(true);
+
+      // Lazy load remaining frames in background
+      const lazyLoadRest = async () => {
+        const remainingImages = [...loadedImages];
+        
+        // Load in batches to prevent totally blocking network, but concurrently enough to be fast
+        const BATCH_SIZE = 12;
+        for (let i = INITIAL_FRAMES + 1; i <= FRAME_COUNT; i += BATCH_SIZE) {
+          const batchPromises = [];
+          for (let j = 0; j < BATCH_SIZE && i + j <= FRAME_COUNT; j++) {
+            const frameIndex = i + j;
+            batchPromises.push(new Promise<{img: HTMLImageElement, success: boolean}>((resolve) => {
+              const img = new Image();
+              img.src = `/Frame/frame-${frameIndex.toString().padStart(3, '0')}.webp`;
+              img.onload = () => resolve({ img, success: true });
+              img.onerror = () => resolve({ img, success: false });
+            }));
+          }
+          
+          const batchResults = await Promise.all(batchPromises);
+          
+          batchResults.forEach(({ img, success }) => {
+            if (success) {
+              remainingImages.push(img);
+            } else if (remainingImages.length > 0) {
+              remainingImages.push(remainingImages[remainingImages.length - 1]);
+            } else {
+              remainingImages.push(img);
+            }
+          });
+          
+          // Update state after each batch
+          setImages([...remainingImages]);
+        }
+      };
+
+      // Start background hydration without blocking main thread heavily
+      requestIdleCallback ? requestIdleCallback(() => lazyLoadRest()) : setTimeout(lazyLoadRest, 500);
+
+    }, 600);
+  }, []);
+
+  useEffect(() => {
+    preloadImages();
+  }, [preloadImages]);
+
+  // Lock scroll while loading
+  useEffect(() => {
+    if (!isLoaded) {
+      document.body.style.overflow = "hidden";
+      // ensure we are at the top when reloading
+      window.scrollTo(0, 0);
+    } else {
+      document.body.style.overflow = "";
+    }
+  }, [isLoaded]);
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+    <main className="relative bg-transparent">
+      <FilmGrain />
+      <AnimatePresence>
+        {!isLoaded && <Loader progress={progress} />}
+      </AnimatePresence>
+
+      {/* 
+        Pass loaded images to CanvasSequence so it doesn't need to load them again
+      */}
+      <CanvasSequence images={images} />
+
+      {/* 
+        Pass isLoaded to StoryBlocks so initial animations only trigger after loading
+      */}
+      <StoryBlocks isLoaded={isLoaded} />
+
+      {/* Persistent floating FAB */}
+      <FloatWhatsApp />
+    </main>
   );
 }
