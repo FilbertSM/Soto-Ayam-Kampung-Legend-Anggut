@@ -41,14 +41,6 @@ export default function CanvasSequence({ images }: CanvasSequenceProps) {
     ctx.fillRect(0, 0, rect.width, rect.height);
 
     ctx.drawImage(img, offsetX, offsetY, drawWidth, drawHeight);
-
-    // Add gradient overlay to match background color seamlessly
-    const gradient = ctx.createLinearGradient(0, 0, 0, rect.height);
-    gradient.addColorStop(0, 'rgba(26, 15, 10, 0.4)');
-    gradient.addColorStop(0.5, 'rgba(26, 15, 10, 0.1)');
-    gradient.addColorStop(1, 'rgba(26, 15, 10, 0.8)');
-    ctx.fillStyle = gradient;
-    ctx.fillRect(0, 0, rect.width, rect.height);
   };
 
   const imagesRef = useRef(images);
@@ -145,6 +137,7 @@ export default function CanvasSequence({ images }: CanvasSequenceProps) {
       role="img"
       aria-label="Cinematic sequence showing the preparation of Soto Anggut"
       className="fixed top-0 left-0 z-0 w-full h-full object-cover"
+      style={{ willChange: 'transform, opacity', transform: 'translateZ(0)' }}
     />
   );
 }

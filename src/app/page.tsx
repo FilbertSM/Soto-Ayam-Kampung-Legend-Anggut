@@ -7,6 +7,7 @@ import StoryBlocks from "@/components/StoryBlocks";
 import FloatWhatsApp from "@/components/ui/FloatWhatsApp";
 import Loader from "@/components/ui/Loader";
 import FilmGrain from "@/components/ui/FilmGrain";
+import Header from "@/components/ui/Header";
 import { FRAME_COUNT } from "@/lib/constants";
 
 export default function Home() {
@@ -22,7 +23,7 @@ export default function Home() {
 
     // Preload Critical Path
     const initialPromises = Array.from({ length: INITIAL_FRAMES }, (_, i) => {
-      return new Promise<{img: HTMLImageElement, success: boolean}>((resolve) => {
+      return new Promise<{img: HTMLImageElement, success: boolean}>(async (resolve) => {
         const img = new Image();
         img.src = `${basePath}/Frame/frame-${(i + 1).toString().padStart(3, '0')}.webp`;
         
@@ -32,8 +33,12 @@ export default function Home() {
           resolve({ img, success });
         };
 
-        img.onload = () => handleComplete(true);
-        img.onerror = () => handleComplete(false);
+        try {
+          await img.decode();
+          handleComplete(true);
+        } catch (e) {
+          handleComplete(false);
+        }
       });
     });
 
@@ -67,11 +72,15 @@ export default function Home() {
           const batchPromises = [];
           for (let j = 0; j < BATCH_SIZE && i + j <= FRAME_COUNT; j++) {
             const frameIndex = i + j;
-            batchPromises.push(new Promise<{img: HTMLImageElement, success: boolean}>((resolve) => {
+            batchPromises.push(new Promise<{img: HTMLImageElement, success: boolean}>(async (resolve) => {
               const img = new Image();
               img.src = `${basePath}/Frame/frame-${frameIndex.toString().padStart(3, '0')}.webp`;
-              img.onload = () => resolve({ img, success: true });
-              img.onerror = () => resolve({ img, success: false });
+              try {
+                await img.decode();
+                resolve({ img, success: true });
+              } catch (e) {
+                resolve({ img, success: false });
+              }
             }));
           }
           
@@ -119,6 +128,8 @@ export default function Home() {
       <AnimatePresence>
         {!isLoaded && <Loader progress={progress} />}
       </AnimatePresence>
+
+      <Header />
 
       {/* 
         Pass loaded images to CanvasSequence so it doesn't need to load them again

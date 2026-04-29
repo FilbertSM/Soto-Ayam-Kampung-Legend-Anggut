@@ -72,31 +72,33 @@ export default function StoryBlocks({ isLoaded }: { isLoaded: boolean }) {
     <>
       <div ref={containerRef} className="relative z-10 w-full">
         {/* 0-25%: Arrival */}
-        <section className="min-h-screen flex items-center justify-center px-4">
+        <section className="min-h-screen flex items-center justify-center px-4" id="story">
           <motion.div
             initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 50 }}
             animate={isLoaded ? { opacity: 1, y: 0 } : { opacity: 0, y: shouldReduceMotion ? 0 : 50 }}
             transition={{ duration: shouldReduceMotion ? 0 : 1, ease: "easeOut", delay: shouldReduceMotion ? 0 : 0.6 }}
-            className="text-center max-w-4xl"
+            className="text-center w-full max-w-6xl"
           >
-            <h1 className="font-serif text-5xl md:text-7xl lg:text-8xl text-[#FDFBF7] drop-shadow-2xl">
-              The Authentic Makassar Experience
+            <h1 className="font-serif text-[clamp(3rem,8vw,8rem)] text-[#FDFBF7] drop-shadow-[0_4px_24px_rgba(0,0,0,0.8)] leading-tight">
+              The Authentic <br className="hidden md:block" />Makassar Experience
             </h1>
           </motion.div>
         </section>
 
         {/* 25-50%: Core Ingredients */}
         <section className="min-h-screen flex items-center justify-center px-4">
-          <div className="max-w-6xl w-full flex flex-col md:flex-row gap-8 justify-between">
+          <div className="max-w-6xl w-full flex flex-col md:flex-row gap-16 md:gap-8 justify-between">
             <motion.div
               initial={{ opacity: 0, x: shouldReduceMotion ? 0 : -50 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: shouldReduceMotion ? 0 : 0.8, ease: "easeOut" }}
               viewport={{ once: false, amount: 0.5 }}
-              className="bg-[#D49A00] p-8 md:p-12 rounded-3xl shadow-2xl max-w-md w-full"
+              className="max-w-xl w-full"
             >
-              <h2 className="font-serif text-3xl md:text-4xl text-[#FDFBF7] mb-4">24-Hour Spiced Broth</h2>
-              <p className="font-sans text-[#FDFBF7]/90 text-lg">
+              <h2 className="font-serif text-[clamp(2.5rem,5vw,5rem)] text-[#FDFBF7] drop-shadow-[0_4px_24px_rgba(0,0,0,0.8)] mb-6 leading-tight">
+                24-Hour <br />Spiced Broth
+              </h2>
+              <p className="font-sans text-[#FDFBF7] text-[clamp(1.125rem,2vw,1.5rem)] drop-shadow-[0_2px_12px_rgba(0,0,0,0.8)]">
                 Slow-cooked to perfection. We simmer our broth with a secret blend of Makassar spices, letting the rich flavors deepen over a full day.
               </p>
             </motion.div>
@@ -106,10 +108,12 @@ export default function StoryBlocks({ isLoaded }: { isLoaded: boolean }) {
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: shouldReduceMotion ? 0 : 0.8, ease: "easeOut", delay: shouldReduceMotion ? 0 : 0.2 }}
               viewport={{ once: false, amount: 0.5 }}
-              className="bg-[#A13316] p-8 md:p-12 rounded-3xl shadow-2xl max-w-md w-full md:mt-32"
+              className="max-w-xl w-full md:mt-32"
             >
-              <h2 className="font-serif text-3xl md:text-4xl text-[#FDFBF7] mb-4">Premium Beef & Fresh Shallots</h2>
-              <p className="font-sans text-[#FDFBF7]/90 text-lg">
+              <h2 className="font-serif text-[clamp(2.5rem,5vw,5rem)] text-[#FDFBF7] drop-shadow-[0_4px_24px_rgba(0,0,0,0.8)] mb-6 leading-tight">
+                Premium Beef & <br />Fresh Shallots
+              </h2>
+              <p className="font-sans text-[#FDFBF7] text-[clamp(1.125rem,2vw,1.5rem)] drop-shadow-[0_2px_12px_rgba(0,0,0,0.8)]">
                 Only the most tender cuts of beef make the bowl, topped with perfectly crisp shallots for that iconic Soto Anggut crunch.
               </p>
             </motion.div>
@@ -123,10 +127,12 @@ export default function StoryBlocks({ isLoaded }: { isLoaded: boolean }) {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: shouldReduceMotion ? 0 : 0.8, ease: "easeOut" }}
             viewport={{ once: false, amount: 0.8 }}
-            className="bg-[#A13316]/90 backdrop-blur-sm p-8 md:p-12 rounded-3xl shadow-2xl max-w-3xl text-center pointer-events-auto"
+            className="w-full max-w-6xl text-center pointer-events-auto"
           >
-            <h2 className="font-serif text-4xl md:text-5xl text-[#FDFBF7] mb-4">A Burst of Freshness.</h2>
-            <p className="font-serif text-2xl md:text-3xl text-[#FDFBF7]/90 italic">
+            <h2 className="font-serif text-[clamp(3.5rem,7vw,7rem)] text-[#FDFBF7] drop-shadow-[0_4px_24px_rgba(0,0,0,0.8)] mb-4 leading-none">
+              A Burst of Freshness.
+            </h2>
+            <p className="font-serif text-[clamp(1.5rem,3vw,3rem)] text-[#FDFBF7] drop-shadow-[0_2px_12px_rgba(0,0,0,0.8)] italic">
               Passed Down Through Generations.
             </p>
           </motion.div>
@@ -139,17 +145,19 @@ export default function StoryBlocks({ isLoaded }: { isLoaded: boolean }) {
             whileInView={{ opacity: 1, scale: 1 }}
             transition={{ duration: shouldReduceMotion ? 0 : 0.8, ease: "easeOut" }}
             viewport={{ once: false, amount: 0.5 }}
-            className="bg-[#D49A00] p-10 md:p-16 rounded-[3rem] shadow-2xl text-center max-w-2xl w-full"
+            className="text-center w-full max-w-4xl"
           >
-            <h2 className="font-serif text-5xl md:text-6xl text-[#FDFBF7] mb-6">Craving a Bowl?</h2>
-            <p className="font-sans text-xl text-[#FDFBF7]/90 mb-10">
+            <h2 className="font-serif text-[clamp(3.5rem,6vw,6rem)] text-[#FDFBF7] drop-shadow-[0_4px_24px_rgba(0,0,0,0.8)] mb-6 leading-tight">
+              Craving a Bowl?
+            </h2>
+            <p className="font-sans text-[clamp(1.25rem,2.5vw,1.75rem)] text-[#FDFBF7] drop-shadow-[0_2px_12px_rgba(0,0,0,0.8)] mb-10">
               Experience the legendary taste of Makassar, delivered hot to your door or ready for pickup.
             </p>
             <a
               href="https://wa.me/089678243688"
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-[#1A0F0A] text-[#FDFBF7] font-sans font-semibold text-lg px-8 py-4 rounded-full hover:bg-black transition-colors duration-300 inline-block"
+              className="bg-[#D49A00] text-[#1A0F0A] font-sans font-semibold text-lg md:text-xl px-10 py-5 rounded-full hover:bg-[#b38200] transition-colors duration-300 shadow-xl inline-block"
             >
               Order Direct
             </a>
@@ -158,7 +166,7 @@ export default function StoryBlocks({ isLoaded }: { isLoaded: boolean }) {
       </div>
 
       {/* Location & Hours */}
-      <section className="min-h-screen flex items-center justify-center py-32 px-4 bg-[#1A0F0A] relative z-20">
+      <section className="min-h-screen flex items-center justify-center py-32 px-4 relative z-20 mt-32" id="visit">
         <motion.div
           initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 50 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -168,14 +176,16 @@ export default function StoryBlocks({ isLoaded }: { isLoaded: boolean }) {
         >
           {/* Column A: Info */}
           <div className="flex flex-col gap-8">
-            <h2 className="font-serif text-5xl md:text-7xl text-[#FDFBF7] leading-tight">
+            <h2 className="font-serif text-[clamp(3rem,6vw,6rem)] text-[#FDFBF7] drop-shadow-[0_4px_24px_rgba(0,0,0,0.8)] leading-tight">
               Visit the Home of <br /> Soto Anggut
             </h2>
-            <div className="flex flex-col gap-4">
-              <h3 className="font-sans text-xl text-[#FDFBF7]/80 tracking-widest uppercase">Operating Hours</h3>
-              <p className="font-serif text-2xl text-[#D49A00]">
-                Weekend Only: 07:00 - 15:00
-              </p>
+            <div className="flex flex-col gap-6 backdrop-blur-md bg-black/20 border border-white/10 rounded-2xl p-8 shadow-2xl">
+              <div>
+                <h3 className="font-sans text-lg text-[#FDFBF7]/80 tracking-widest uppercase mb-2 drop-shadow-md">Operating Hours</h3>
+                <p className="font-serif text-3xl text-[#D49A00] drop-shadow-md">
+                  Weekend Only: 07:00 - 15:00
+                </p>
+              </div>
               <LiveStatus />
             </div>
           </div>
@@ -209,7 +219,7 @@ export default function StoryBlocks({ isLoaded }: { isLoaded: boolean }) {
       </section>
 
       {/* Social & Credits */}
-      <section className="flex flex-col items-center justify-center py-20 px-4 bg-[#1A0F0A] relative z-20 border-t border-white/5">
+      <section className="flex flex-col items-center justify-center py-20 px-4 relative z-20 mt-32">
         <motion.div
           initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 30 }}
           whileInView={{ opacity: 1, y: 0 }}
