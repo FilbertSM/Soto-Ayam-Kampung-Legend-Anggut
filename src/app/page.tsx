@@ -18,11 +18,13 @@ export default function Home() {
     let loadedCount = 0;
     const INITIAL_FRAMES = 24; // Load first 10% (24 frames) for fast initial load
 
+    const basePath = process.env.NODE_ENV === 'production' ? '/Soto-Ayam-Kampung-Legend-Anggut' : '';
+
     // Preload Critical Path
     const initialPromises = Array.from({ length: INITIAL_FRAMES }, (_, i) => {
       return new Promise<{img: HTMLImageElement, success: boolean}>((resolve) => {
         const img = new Image();
-        img.src = `/Frame/frame-${(i + 1).toString().padStart(3, '0')}.webp`;
+        img.src = `${basePath}/Frame/frame-${(i + 1).toString().padStart(3, '0')}.webp`;
         
         const handleComplete = (success: boolean) => {
           loadedCount++;
@@ -67,7 +69,7 @@ export default function Home() {
             const frameIndex = i + j;
             batchPromises.push(new Promise<{img: HTMLImageElement, success: boolean}>((resolve) => {
               const img = new Image();
-              img.src = `/Frame/frame-${frameIndex.toString().padStart(3, '0')}.webp`;
+              img.src = `${basePath}/Frame/frame-${frameIndex.toString().padStart(3, '0')}.webp`;
               img.onload = () => resolve({ img, success: true });
               img.onerror = () => resolve({ img, success: false });
             }));
