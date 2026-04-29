@@ -166,13 +166,25 @@ export default function StoryBlocks({ isLoaded }: { isLoaded: boolean }) {
         </section>
       </div>
 
-      {/* Gradient mask to smoothly fade the canvas into the footer */}
-      <div className="relative z-20 w-full h-[30vh] bg-gradient-to-b from-transparent to-[#1F140C] pointer-events-none -mt-[30vh]" />
+      {/* --- Smooth Cinematic Fade Transition --- */}
+      <div className="relative z-20 w-full">
+        {/* 
+          1. The Feather Mask
+          This block scrolls up over the fixed canvas sequence.
+          It spans 40% of the viewport height (h-[40vh]), creating an extremely slow, 
+          smooth fade from completely transparent down into the solid dark roast color. 
+        */}
+        <div className="w-full h-[40vh] bg-gradient-to-b from-transparent to-[#1F140C] pointer-events-none" />
 
-      {/* Solid warm overlay background for footer section */}
-      <div className="relative z-20 bg-[#1F140C] py-8">
-        {/* Location & Hours */}
-        <section className="flex flex-col items-center justify-center px-4" id="visit">
+        {/* 
+          2. The Solid Footer Body
+          It sits perfectly flush below the gradient mask. Because the mask ends 
+          exactly at #1F140C and this box starts at #1F140C, there is zero visible line.
+        */}
+        <div className="w-full bg-[#1F140C] pb-10">
+          
+          {/* Location & Hours */}
+          <section className="flex flex-col items-center justify-center px-4" id="visit">
           <motion.div
             initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 50 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -222,10 +234,10 @@ export default function StoryBlocks({ isLoaded }: { isLoaded: boolean }) {
               </div>
             </div>
           </motion.div>
-        </section>
+          </section>
 
-        {/* Social & Credits */}
-        <section className="flex flex-col items-center justify-center pb-20 px-4 relative z-20 mt-16">
+          {/* Social & Credits */}
+          <section className="flex flex-col items-center justify-center pb-20 px-4 relative z-20 mt-16">
           <motion.div
             initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -302,6 +314,8 @@ export default function StoryBlocks({ isLoaded }: { isLoaded: boolean }) {
             </div>
           </motion.div>
         </section>
+
+        </div>
       </div>
     </>
   );
