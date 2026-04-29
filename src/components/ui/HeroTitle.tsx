@@ -14,14 +14,22 @@ export default function HeroTitle() {
       <div className="absolute top-0 left-0 w-full h-[80vh] bg-gradient-to-b from-black/100 via-black/60 to-transparent z-0" />
 
       {/* TITLE WRAPPER: Elevated Z-index, subtle drop shadow for readability */}
-      <div className="relative z-10 flex flex-col items-center drop-shadow-xl mt-[-10vh]">
+      <div className="relative z-10 flex flex-col items-stretch max-w-min mx-auto drop-shadow-xl mt-[-10vh]">
         
-        {/* SOTO AYAM */}
-        <span 
-          className={`${montserrat.className} text-white uppercase text-xl md:text-3xl font-light tracking-[0.6em] md:tracking-[0.8em] leading-none mb-2 md:mb-4 ml-4`}
+        {/* SOTO AYAM - Using flex-between to perfectly match KAMPUNG width */}
+        <div 
+          className={`${montserrat.className} text-white uppercase text-[2.5rem] md:text-[5rem] lg:text-[7.5rem] font-light leading-none mb-2 md:mb-4 lg:mb-6 w-full flex justify-between`}
         >
-          Soto Ayam
-        </span>
+          <span>S</span>
+          <span>O</span>
+          <span>T</span>
+          <span>O</span>
+          <span>&nbsp;</span>
+          <span>A</span>
+          <span>Y</span>
+          <span>A</span>
+          <span>M</span>
+        </div>
 
         {/* KAMPUNG & Legend Block */}
         <div className="relative inline-block text-center flex flex-col items-center">
