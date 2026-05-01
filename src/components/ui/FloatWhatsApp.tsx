@@ -7,7 +7,7 @@ export default function FloatWhatsApp() {
 
   return (
     <motion.a
-      href="https://wa.me/629678243688" // Replace with actual WhatsApp number
+      href="https://wa.me/6289678243688"
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Chat with us on WhatsApp"
