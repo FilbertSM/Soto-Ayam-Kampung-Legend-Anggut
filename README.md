@@ -1,6 +1,6 @@
 # Soto Anggut - Cinematic Landing Experience
 
-A premium, cinematic landing page for **Soto Anggut**, showcasing the legendary taste of Makassar. Built with Next.js 14, Framer Motion, and Tailwind CSS, this project features a high-fidelity canvas-based image sequence that drives a seamless, scroll-linked storytelling experience.
+A premium, cinematic landing page for **Soto Anggut**, showcasing a legendary culinary heritage. Built with Next.js 14, Framer Motion, and Tailwind CSS, this project features a high-fidelity canvas-based image sequence that drives a seamless, scroll-linked storytelling experience.
 
 ![thumbnail](public/thumbnail.png)
 

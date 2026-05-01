@@ -91,7 +91,7 @@ export default function StoryBlocks({ isLoaded }: { isLoaded: boolean }) {
               24-Hour <br />Spiced Broth
             </h2>
             <p className="font-sans text-[#FDFBF7] text-[clamp(1.125rem,2vw,1.5rem)] drop-shadow-[0_2px_12px_rgba(0,0,0,0.8)]">
-              Slow-cooked to perfection. We simmer our broth with a secret blend of Makassar spices, letting the rich flavors deepen over a full day.
+              Slow-cooked to perfection. We simmer our broth with a secret blend of heritage spices, letting the rich flavors deepen over a full day.
             </p>
           </motion.div>
         </section>
@@ -145,7 +145,7 @@ export default function StoryBlocks({ isLoaded }: { isLoaded: boolean }) {
               Craving a Bowl?
             </h2>
             <p className="font-sans text-[clamp(1.125rem,2vw,1.5rem)] text-[#FDFBF7] drop-shadow-[0_2px_12px_rgba(0,0,0,0.8)] mb-10 ml-auto">
-              Experience the legendary taste of Makassar, delivered hot to your door or ready for pickup.
+              Experience the legendary home-cooked taste, delivered hot to your door or ready for pickup.
             </p>
             <a
               href="https://wa.me/629678243688"
@@ -241,7 +241,7 @@ export default function StoryBlocks({ isLoaded }: { isLoaded: boolean }) {
             {/* Business Socials */}
             <div className="flex flex-col items-center gap-8">
               <h2 className="font-serif text-3xl md:text-4xl text-[#FDFBF7]">
-                Experience Makassar at Home
+                Experience the Legend at Home
               </h2>
               <div className="flex flex-col sm:flex-row gap-6 mt-2 w-full sm:w-auto">
                 <a

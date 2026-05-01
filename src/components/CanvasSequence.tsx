@@ -185,7 +185,7 @@ export default function CanvasSequence({ images }: CanvasSequenceProps) {
       </noscript>
       <img
         src="/og-image.png"
-        alt="Soto Ayam Kampung Legend Anggut di Balikpapan - Kuliner Makassar Otentik"
+        alt="Soto Ayam Kampung Legend Anggut di Balikpapan - Kuliner Warisan Otentik"
         className="sr-only" /* sr-only ensures it's readable by screen readers but visually absolute 1x1 rect */
         fetchPriority="low"  /* Keep the main thread focused on canvas first */
       />

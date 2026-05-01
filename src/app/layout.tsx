@@ -16,8 +16,8 @@ const playfair = Playfair_Display({
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL || "https://sotoanggut.me"),
   title: "Soto Ayam Kampung Legend Anggut | Kuliner Balikpapan",
-  description: "Nikmati soto ayam kampung terdekat dan paling otentik di Balikpapan. Kuliner legendaris dengan resep asli Makassar.",
-  keywords: ["soto ayam", "soto ayam kampung", "soto balikpapan", "kuliner balikpapan", "soto makassar", "soto ayam terdekat", "soto legend"],
+  description: "Nikmati soto ayam kampung terdekat dan paling otentik di Balikpapan. Kuliner legendaris dengan resep warisan keluarga.",
+  keywords: ["soto ayam", "soto ayam kampung", "soto balikpapan", "kuliner balikpapan", "soto terdekat", "soto ayam terdekat", "soto legend"],
   openGraph: {
     title: "Soto Ayam Kampung Legend Anggut | Balikpapan",
     description: "Kuliner otentik legendaris di Balikpapan. Pesan sekarang atau kunjungi kedai kami.",
