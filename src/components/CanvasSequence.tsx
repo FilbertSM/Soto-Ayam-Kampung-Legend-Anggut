@@ -167,12 +167,28 @@ export default function CanvasSequence({ images }: CanvasSequenceProps) {
   });
 
   return (
-    <canvas
-      ref={canvasRef}
-      role="img"
-      aria-label="Cinematic sequence showing the preparation of Soto Anggut"
-      className={`fixed top-0 left-0 z-0 w-full h-full object-cover transition-opacity duration-1000 ${shouldRenderCanvas ? 'opacity-100' : 'opacity-0'}`}
-      style={{ willChange: 'transform, opacity', transform: 'translateZ(0)' }}
-    />
+    <>
+      <canvas
+        ref={canvasRef}
+        role="presentation"
+        aria-hidden="true"
+        className={`fixed top-0 left-0 z-0 w-full h-full object-cover transition-opacity duration-1000 ${shouldRenderCanvas ? 'opacity-100' : 'opacity-0'}`}
+        style={{ willChange: 'transform, opacity', transform: 'translateZ(0)' }}
+      />
+      {/* SEO Fallback Image - Visually hidden but indexable by Googlebot */}
+      <noscript>
+        <img 
+          src="/og-image.png" 
+          alt="Soto Ayam Kampung Legend Anggut di Balikpapan" 
+          className="hidden" 
+        />
+      </noscript>
+      <img
+        src="/og-image.png"
+        alt="Soto Ayam Kampung Legend Anggut di Balikpapan - Kuliner Makassar Otentik"
+        className="sr-only" /* sr-only ensures it's readable by screen readers but visually absolute 1x1 rect */
+        fetchPriority="low"  /* Keep the main thread focused on canvas first */
+      />
+    </>
   );
 }
