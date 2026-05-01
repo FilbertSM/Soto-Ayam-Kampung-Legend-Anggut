@@ -67,7 +67,7 @@ const jsonLd = {
   "@context": "https://schema.org",
   "@type": "Restaurant",
   "name": "Soto Ayam Kampung Legend Anggut",
-  "image": "https://sotoanggut.com/og-image.png",
+  "image": "https://sotoanggut.me/og-image.png",
   "@id": "https://maps.app.goo.gl/GYDn5LnSerBnbts66",
   "url": "https://maps.app.goo.gl/GYDn5LnSerBnbts66",
   "telephone": "+6289678243688",
