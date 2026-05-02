@@ -42,9 +42,10 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
+      { url: "/favicon.ico", sizes: "32x32" },
       { url: "/favicon.svg", type: "image/svg+xml" }
     ],
-    shortcut: "/favicon.svg",
+    shortcut: "/favicon.ico",
     apple: "/favicon.svg", // Though ideally a PNG is better for Apple Touch Icon, this acts as a fallback.
   },
   alternates: {
